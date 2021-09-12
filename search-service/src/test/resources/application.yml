@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: SearchService
+
+search_service:
+  folder:
+    path: ./src/test/resources/tmp
+  file:
+    extension: .txt
