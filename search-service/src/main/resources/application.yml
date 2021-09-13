@@ -2,8 +2,22 @@ spring:
   application:
     name: SearchService
 
+  cache:
+    cache-names: search_service
+    caffeine:
+      spec: maximumSize=500, expireAfterAccess=30m
+
 search_service:
   folder:
     path: /var/tmp
   file:
     extension: .txt
+
+logging:
+  file: ${java.io.tmpdir}/search_service.log
+  level:
+    root: DEBUG
+    org.springframework: INFO
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%'

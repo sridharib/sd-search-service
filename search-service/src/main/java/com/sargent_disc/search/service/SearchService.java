@@ -3,6 +3,8 @@ package com.sargent_disc.search.service;
 import com.sargent_disc.model.SearchResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@CacheConfig(cacheNames = {"search_service"})
 public class SearchService {
 
     private static final String WORD_DELIMITER = " ";
@@ -32,6 +35,7 @@ public class SearchService {
         this.fileExtension = fileExtension;
     }
 
+    @Cacheable
     public SearchResult search(String searchQuery) {
 
         List<String> files = new ArrayList<>();
